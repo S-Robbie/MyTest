@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": 1,
+    "title": "DAA Node RI Service"
+  },
+  "paths": {
+    "/getDaaNodeCircuit/{daaNodeName}": {
+      "get": {
+        "summary": "Return DAA node circuit details",
+        "operationId": "getDaaNodeCircuit",
+        "parameters": [
+          {
+            "name": "daaNodeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DAA node circuit details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaaNodeCircuit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "DAA node name doesn't exist"
+          },
+          "404": {
+            "description": "DAA node name is not part of a circuit"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/createDaaNodeCircuit": {
+      "post": {
+        "summary": "Create DAA Node/CIN Circuit",
+        "operationId": "createDaaNodeConnection",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "daaNodeName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "hubsite",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DAA node circuit details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaaNodeCircuit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (hubsite doesn't match)"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/deleteDaaNodeCircuit/{daaNodeName}": {
+      "post": {
+        "summary": "Delete DAA Node/CIN Circuit",
+        "operationId": "deleteDaaNodeCircuit",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "daaNodeName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/addCcapToDaaNodeCircuit": {
+      "post": {
+        "summary": "Add CCAP FQDN and IPv6 address to CIN port for DAA node circuit",
+        "operationId": "addCcapToDaaNodeCircuit",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "daaNodeName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ccapFqdn",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ccapIPv6",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DAA node circuit details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaaNodeCircuit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "DaaNodeCircuit doesn't exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/addRpdMacToDaaNodeCircuit": {
+      "post": {
+        "summary": "Add RPD MAC address to transmission circuit for DAA node",
+        "operationId": "addRpdMacToDaaNodeCircuit",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "daaNodeName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "rpdMacAddress",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DAA node circuit details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaaNodeCircuit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "DaaNodeCircuit doesn't exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/removeRpdMacFromDaaNodeCircuit": {
+      "post": {
+        "summary": "Remove RPD MAC address from transmission circuit for DAA node",
+        "operationId": "removeRpdMacFromDaaNodeCircuit",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "daaNodeName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "rpdMacAddress",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "DAA node circuit details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DaaNodeCircuit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "DaaNodeCircuit doesn't exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DaaNodeCircuit": {
+        "type": "object",
+        "properties": {
+          "daaNodeName": {
+            "type": "string"
+          },
+          "daaNodeId": {
+            "type": "string"
+          },
+          "hubsite": {
+            "type": "string"
+          },
+          "daaNodeLogicalStatus": {
+            "type": "string",
+            "enum": [
+              "Next",
+              "Active"
+            ]
+          },
+          "transmissionCircuitId": {
+            "type": "string"
+          },
+          "transmissionCircuitStatus": {
+            "enum": [
+              "Planned",
+              "In Service"
+            ]
+          },
+          "cinDeviceName": {
+            "type": "string"
+          },
+          "cinDeviceId": {
+            "type": "string"
+          },
+          "cinPortId": {
+            "type": "string"
+          },
+          "cinPortIpv6Prefix": {
+            "type": "string"
+          },
+          "cinPortStatus": {
+            "enum": [
+              "Available",
+              "Reserved",
+              "Assigned"
+            ]
+          },
+          "cinPortCcapFqdn": {
+            "type": "string"
+          },
+          "cinPortCcapIPv6": {
+            "type": "string"
+          },
+          "rpdMacAddress": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "daaNodeName"
+        ]
+      }
+    }
+  }
+}
